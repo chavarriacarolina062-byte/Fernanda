@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Para Fernanda 🌻</title>
+<style>
+*{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:Georgia,'Times New Roman',serif;background:#07000a;color:#fff}
+body{touch-action:manipulation}
+#app{position:relative;width:100%;height:100%;overflow:hidden;background:
+radial-gradient(circle at 50% 45%,rgba(255,206,34,.16),transparent 24%),
+radial-gradient(circle at 50% 80%,rgba(255,0,135,.25),transparent 42%),
+linear-gradient(160deg,#27001d,#070008 65%,#16000f)}
+canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+#stars{z-index:2}
+.screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:5;opacity:0;pointer-events:none;transition:opacity 1.2s ease}
+.screen.active{opacity:1;pointer-events:auto}
+.intro{flex-direction:column;text-align:center;padding:25px}
+.glowTitle{font-size:clamp(42px,12vw,76px);letter-spacing:3px;text-shadow:0 0 10px #ff9bdc,0 0 30px #ff1b9a,0 0 65px #ff1b9a;margin:0 0 12px}
+.subtitle{font-size:clamp(16px,4.5vw,23px);opacity:.9;margin-bottom:38px}
+.openBtn,.smallBtn{border:0;border-radius:999px;padding:15px 28px;font-size:16px;font-weight:bold;letter-spacing:.8px;color:#241400;background:linear-gradient(135deg,#ffe66b,#f4b900);box-shadow:0 0 18px rgba(255,211,52,.65),inset 0 2px 0 #fff6a8;cursor:pointer}
+.openBtn:active,.smallBtn:active{transform:scale(.96)}
+.hint{margin-top:16px;font-size:12px;opacity:.65}
+.garden{align-items:center;justify-content:center}
+.scene{position:relative;width:min(92vw,560px);height:min(75vh,620px);border-radius:30px;overflow:hidden;background:
+radial-gradient(circle at 50% 48%,rgba(255,220,50,.18),transparent 20%),
+radial-gradient(circle at 50% 75%,rgba(255,212,35,.08),transparent 40%),
+#020503;box-shadow:0 0 35px rgba(255,221,57,.25),0 0 100px rgba(255,185,0,.1);transform-style:preserve-3d;transition:transform .18s ease}
+.scene:before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.6) 0 1px,transparent 2px);background-size:34px 34px;opacity:.3;animation:twinkle 3s infinite alternate}
+@keyframes twinkle{to{opacity:.08}}
+.heart3d{position:absolute;left:50%;top:25%;transform:translateX(-50%) rotate(-4deg);font-size:clamp(75px,20vw,120px);color:#ffe24a;text-shadow:0 0 8px #fff2a4,0 0 28px #ffc400,0 0 60px #e5a800;filter:drop-shadow(0 15px 15px rgba(255,190,0,.25));animation:pulse 2.3s infinite ease-in-out}
+@keyframes pulse{50%{transform:translateX(-50%) scale(1.08) rotate(4deg);filter:drop-shadow(0 18px 25px rgba(255,220,70,.5))}}
+.centerText{position:absolute;left:0;right:0;top:47%;text-align:center;font-size:clamp(22px,6vw,34px);font-weight:bold;text-shadow:0 0 12px #ffd72e}
+.word{position:absolute;font-size:12px;color:#ffeeb0;text-shadow:0 0 8px #ffd400;animation:float 5s ease-in-out infinite}
+.w1{left:8%;top:36%}.w2{right:8%;top:42%}.w3{left:15%;top:58%}.w4{right:12%;top:60%}.w5{left:42%;top:73%}.w6{right:4%;top:28%}
+@keyframes float{50%{transform:translateY(-13px) scale(1.04)}}
+.flower{position:absolute;font-size:42px;filter:drop-shadow(0 0 9px rgba(255,213,48,.65));animation:flowerFloat 4.5s ease-in-out infinite}
+.f1{left:5%;top:52%;animation-delay:-1s}.f2{right:4%;top:50%;font-size:50px;animation-delay:-2s}.f3{left:22%;bottom:7%;font-size:34px;animation-delay:-.5s}.f4{right:23%;bottom:8%;font-size:38px;animation-delay:-3s}.f5{left:43%;top:8%;font-size:30px;animation-delay:-1.7s}
+@keyframes flowerFloat{50%{transform:translateY(-15px) rotate(5deg)}}
+.gardenBtn{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:10}
+.note{position:absolute;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:.6s;z-index:30}
+.note.open{opacity:1;pointer-events:auto}
+.paper{width:min(88vw,390px);max-height:78vh;overflow:auto;background:linear-gradient(145deg,#fff7c7,#ffe98c);color:#4c2b00;border-radius:20px;padding:28px 25px;box-shadow:0 20px 70px rgba(255,215,40,.35);transform:perspective(800px) rotateX(12deg) scale(.8);transition:.7s}
+.note.open .paper{transform:perspective(800px) rotateX(0) scale(1)}
+.paper h2{text-align:center;color:#8b5700;font-size:28px;margin:0 0 15px}.paper p{font-size:17px;line-height:1.65;margin:9px 0}.sign{text-align:right;font-weight:bold;margin-top:18px}
+.final{flex-direction:column;text-align:center;padding:25px}
+.final h2{font-size:clamp(35px,10vw,60px);color:#ffe05a;text-shadow:0 0 20px #ffb900;margin:0 0 10px}.final p{font-size:18px;max-width:520px;line-height:1.6}.sun{font-size:72px;animation:spin 8s linear infinite;filter:drop-shadow(0 0 18px #ffd400)}@keyframes spin{to{transform:rotate(360deg)}}
+.back{margin-top:20px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+#loading{position:absolute;inset:0;background:#060008;z-index:100;display:flex;align-items:center;justify-content:center;font-size:14px;transition:opacity .8s}
+.hide{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="loading">Preparando la sorpresa para Fernanda… 🌻</div>
+<canvas id="stars"></canvas>
+
+<section class="screen intro active" id="intro">
+  <div style="font-size:28px;animation:float 3s infinite">🌻 ✨ ❤️ ✨ 🌻</div>
+  <h1 class="glowTitle">Fernanda</h1>
+  <div class="subtitle">Tengo una pequeña sorpresa preparada especialmente para ti…</div>
+  <button class="openBtn" onclick="start()">TOCA PARA ABRIR ❤️</button>
+  <div class="hint">Mejor con pantalla completa y sonido activado.</div>
+</section>
+
+<section class="screen garden" id="garden">
+  <div class="scene" id="scene">
+    <div class="heart3d">♥</div>
+    <div class="centerText">Te amo, Fernanda ❤️</div>
+    <div class="word w1">Eres mi sol ☀️</div><div class="word w2">Eres única ✨</div>
+    <div class="word w3">Mi niña 🌻</div><div class="word w4">Mi princesa 👑</div>
+    <div class="word w5">Siempre juntos ❤️</div><div class="word w6">Mi amor 💛</div>
+    <div class="flower f1">🌻</div><div class="flower f2">🌻</div><div class="flower f3">🌻</div>
+    <div class="flower f4">🌻</div><div class="flower f5">🌻</div>
+    <button class="smallBtn gardenBtn" onclick="openNote()">ABRIR MI CARTA 💌</button>
+  </div>
+</section>
+
+<section class="screen final" id="final">
+  <div class="sun">🌻</div>
+  <h2>Para ti, Fernanda</h2>
+  <p>Quiero seguir creando recuerdos contigo, disfrutando cada momento y cuidando este cariño tan bonito.</p>
+  <p><b>Gracias por existir y por ser tú. ❤️</b></p>
+  <button class="smallBtn" onclick="go('garden')">VOLVER A VER 🌻</button>
+</section>
+
+<div class="note" id="note" onclick="closeNote(event)">
+  <div class="paper" onclick="event.stopPropagation()">
+    <h2>Mi amor, Fernanda 🌻</h2>
+    <p>Quería hacerte algo diferente, algo que pudieras abrir y sentir que detrás de cada detalle hay un poquito de mi cariño.</p>
+    <p>Me encanta compartir momentos contigo. Tu sonrisa, tu carita, tus ojos y cada pequeño detalle tuyo hacen que para mí seas una persona muy especial.</p>
+    <p>No necesito que todo sea perfecto. Solo quiero seguir disfrutando lo bonito, apoyándonos, riéndonos y guardando recuerdos que algún día podamos mirar y sonreír.</p>
+    <p><b>Gracias por estar en mi vida. Te quiero muchísimo. ❤️</b></p>
+    <div class="sign">Con todo mi cariño,<br>para ti, Fernanda 🌻</div>
+    <div style="text-align:center;margin-top:22px"><button class="smallBtn" onclick="closeNote();go('final')">CONTINUAR ✨</button></div>
+  </div>
+</div>
+</div>
+
+<script>
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');
+let W,H,particles=[],running=true;
+function resize(){W=canvas.width=innerWidth*devicePixelRatio;H=canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=innerWidth;H=innerHeight}
+addEventListener('resize',resize);resize();
+for(let i=0;i<170;i++)particles.push({x:Math.random(),y:Math.random(),r:Math.random()*2+.3,a:Math.random(),s:Math.random()*.003+.001});
+function draw(){if(!running)return;ctx.clearRect(0,0,W,H);for(const p of particles){p.a+=p.s;let alpha=.25+.45*(Math.sin(p.a*10)+1)/2;ctx.fillStyle=`rgba(255,226,80,${alpha})`;ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);ctx.fill()}requestAnimationFrame(draw)}draw();
+
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function start(){go('garden');sparkBurst();document.documentElement.requestFullscreen?.().catch(()=>{});tone(440,.12)}
+function openNote(){document.getElementById('note').classList.add('open');tone(660,.15)}
+function closeNote(e){if(e&&e.target!==document.getElementById('note'))return;document.getElementById('note').classList.remove('open')}
+function sparkBurst(){for(let i=0;i<60;i++){setTimeout(()=>{particles.push({x:.5+(Math.random()-.5)*.3,y:.52+(Math.random()-.5)*.25,r:Math.random()*3+.5,a:Math.random()*6,s:.01})},i*18)}}
+function tone(freq,dur){try{let A=new (window.AudioContext||window.webkitAudioContext)(),o=A.createOscillator(),g=A.createGain();o.frequency.value=freq;o.type='sine';g.gain.setValueAtTime(.0001,A.currentTime);g.gain.exponentialRampToValueAtTime(.07,A.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,A.currentTime+dur);o.connect(g).connect(A.destination);o.start();o.stop(A.currentTime+dur)}catch(e){}}
+const scene=document.getElementById('scene');
+addEventListener('pointermove',e=>{if(!document.getElementById('garden').classList.contains('active'))return;let x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);scene.style.transform=`perspective(1000px) rotateX(${-y*8}deg) rotateY(${x*10}deg)`});
+addEventListener('deviceorientation',e=>{if(!e.gamma)return;scene.style.transform=`perspective(1000px) rotateX(${(e.beta-45)/8}deg) rotateY(${e.gamma/6}deg)`});
+setTimeout(()=>document.getElementById('loading').classList.add('hide'),900);
+</script>
+</body>
+</html>
